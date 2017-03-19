@@ -1,7 +1,7 @@
 # encoding: utf-8
 
-require_relative "test"
-require_relative "print_results"
+require_relative "lib/test"
+require_relative "lib/print_results"
 
 current_path = File.dirname(__FILE__)
 
@@ -30,5 +30,5 @@ points = game.points
 
 # Вывод результатов
 puts "\nВаш результат #{points} баллов"
-results = PrintResults.new(points, results)
-puts results.print
+output = PrintResults.print(points, results)
+puts output
