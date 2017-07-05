@@ -2,28 +2,19 @@
 
 require_relative "lib/test"
 require_relative "lib/print_results"
+require_relative "lib/helper"
 
 current_path = File.dirname(__FILE__)
 
 questions_path = current_path + "/data/questions.txt"
 results_path = current_path + "/data/results.txt"
 
-# Получение массивов с вопросами и результатами
-begin
-  questions = File.readlines(questions_path)
-rescue Errno::ENOENT
-  abort "Файл с ответами не найден"
-end
-
-begin
-  results = File.readlines(results_path)
-rescue Errno::ENOENT
-  abort "Файл с результатами не найден"
-end
+questions = Helper.load_file(questions_path)
+results = Helper.load_file(results_path)
 
 # Запуск игры
-game = Test.new(questions)
-game.play
+app = Test.new(questions)
+app.start
 
 # Получение результатов
 points = game.points

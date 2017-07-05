@@ -1,28 +1,28 @@
 class Test
   attr_accessor :points, :questions
 
+  ANSWER_VARIANTS = {
+    "а" => "да",
+    "б" => "нет",
+    "в" => "иногда",
+  }
+
   def initialize(questions)
     @questions = questions
     @points = 0
-    @answer_variants = {
-      "а" => "да",
-      "б" => "нет",
-      "в" => "иногда",
-    }
+    @answer_variants_view = set_answer_variants_view
   end
 
-  def play
+  def start
     # Перебор вопросов
     questions.each do |question|
       puts question
 
-      variants_view = answer_variants_view
-
       answer = nil
 
       # Ответ пользователя
-      until @answer_variants.key?(answer)
-        puts variants_view
+      until ANSWER_VARIANTS.key?(answer)
+        puts @answer_variants_view
         answer = STDIN.gets.chomp.downcase
       end
 
@@ -36,10 +36,10 @@ class Test
   end
 
   # Представление вывода вариантов ответа
-  def answer_variants_view
+  def set_answer_variants_view
     view = ""
 
-    @answer_variants.each_pair do | index, value |
+    ANSWER_VARIANTS.each_pair do | index, value |
       view += "#{index} - #{value}, "
     end
 
