@@ -13,11 +13,11 @@ questions = Helper.load_file(questions_path)
 results = Helper.load_file(results_path)
 
 # Запуск игры
-app = Test.new(questions)
-app.start
+test = Test.new(questions)
+test.begin
 
 # Получение результатов
-points = game.points
+points = test.points
 
 # Вывод результатов
 puts "\nВаш результат #{points} баллов"

@@ -13,27 +13,16 @@ class Test
     @answer_variants_view = set_answer_variants_view
   end
 
-  def start
+  def begin
     # Перебор вопросов
     questions.each do |question|
       puts question
 
-      answer = nil
-
-      # Ответ пользователя
-      until ANSWER_VARIANTS.key?(answer)
-        puts @answer_variants_view
-        answer = STDIN.gets.chomp.downcase
-      end
-
-      # Подсчет баллов
-      if answer == "а"
-        self.points += 2
-      elsif answer == "в"
-        self.points += 1
-      end
+      count_points(input_answer)
     end
   end
+
+  private
 
   # Представление вывода вариантов ответа
   def set_answer_variants_view
@@ -44,5 +33,27 @@ class Test
     end
 
     view
+  end
+
+  # Получение варианта ответа пот пользователя
+  def input_answer
+    answer = nil
+
+    # Ответ пользователя
+    until ANSWER_VARIANTS.key?(answer)
+      puts @answer_variants_view
+      answer = STDIN.gets.chomp.downcase
+    end
+
+    return answer
+  end
+
+  # Подсчет баллов пользователя
+  def count_points(answer)
+    if answer == "а"
+      self.points += 2
+    elsif answer == "в"
+      self.points += 1
+    end
   end
 end
